@@ -24,6 +24,9 @@
     <ClCompile Include="..\agg_platform\agg_win32_bmp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\agg25\src\agg_vcgen_stroke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\agg_platform\agg_platform_support.h">

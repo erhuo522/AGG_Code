@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\agg25\src\agg_vcgen_stroke.cpp" />
     <ClCompile Include="..\agg_platform\agg_platform_support.cpp" />
     <ClCompile Include="..\agg_platform\agg_win32_bmp.cpp" />
     <ClCompile Include="agg_test.cpp" />

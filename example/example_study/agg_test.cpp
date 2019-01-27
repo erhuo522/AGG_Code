@@ -12,6 +12,11 @@
 #include "agg_pixfmt_rgb.h"
 #include "agg_scanline_u.h"
 
+#include "agg_rasterizer_scanline_aa.h"
+#include "agg_path_storage.h"
+#include "agg_conv_stroke.h"
+#include "agg_rasterizer_scanline_aa.h"
+
 
 class the_application : public  platform_support
 {
@@ -46,17 +51,32 @@ public:
 			m_pixel_map.height(),
 			m_flip_y ? m_pixel_map.stride() : -m_pixel_map.stride());
 
-
-		typedef agg::renderer_base<agg::pixfmt_bgr24> ren_base;
 		agg::pixfmt_bgr24 pixf(renbuf);
-		ren_base ren(pixf);
+
+		typedef agg::renderer_base<agg::pixfmt_bgr24> renderer_base_type;
+		renderer_base_type renb(pixf);
+
+		typedef agg::renderer_scanline_aa_solid<renderer_base_type> renderder_scanline_type;
+		renderder_scanline_type rensl(renb);
 
 		//clean srceen
-		ren.clear(agg::rgba(1,1,1));
+		renb.clear(agg::rgba(1,1,1));
 
-		//draw grcphics
+		agg::path_storage ps;
+		ps.move_to(200,20);
+		ps.line_to(300,400);
+		ps.line_to(300,300);
+
+
+		agg::conv_stroke<agg::path_storage> stroke(ps);
+
 		agg::scanline_u8 sl;
+		agg::rasterizer_scanline_aa<> ras;
 
+		stroke.width(10);
+		ras.add_path(stroke);
+
+		agg::render_scanlines_aa_solid(ras,sl,renb,agg::rgba8(255,0,0));
 
 
 		m_pixel_map.blend(hdc,0,0);
@@ -65,7 +85,7 @@ public:
 
 private:
 	pixel_map  m_pixel_map;
-	bool      m_flip_y;
+	bool       m_flip_y;
 
 
 };
