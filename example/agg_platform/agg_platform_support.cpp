@@ -172,6 +172,13 @@ bool platform_support::init(unsigned width, unsigned height, unsigned flags)
 }
 
 //------------------------------------------------------------------------
+
+void  platform_support::invaldate(bool erase)
+{
+	::InvalidateRect(m_hwnd,NULL, erase);
+}
+
+
 int platform_support::run()
 {
 	MSG msg;

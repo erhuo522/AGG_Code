@@ -16,7 +16,7 @@ public:
 	void message(const char* msg);
 	bool init(unsigned width, unsigned height, unsigned flags);
 	int  run(); 
-
+	void invaldate(bool erase);
 	//--------------------------------------------------------------------        
 	virtual void on_init();
 	virtual void on_resize(int sx, int sy);
