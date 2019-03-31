@@ -1,18 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "agg_study", "example_study\agg_study.vcxproj", "{8FB6748E-D78A-BA65-E6A6-335E3714F7D5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "agg_study", "example_study\agg_study.vcxproj", "{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "freetype\freetype.vcxproj", "{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		MinSizeRel|Win32 = MinSizeRel|Win32
 		Release|Win32 = Release|Win32
+		RelWithDebInfo|Win32 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8FB6748E-D78A-BA65-E6A6-335E3714F7D5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8FB6748E-D78A-BA65-E6A6-335E3714F7D5}.Debug|Win32.Build.0 = Debug|Win32
-		{8FB6748E-D78A-BA65-E6A6-335E3714F7D5}.Release|Win32.ActiveCfg = Release|Win32
-		{8FB6748E-D78A-BA65-E6A6-335E3714F7D5}.Release|Win32.Build.0 = Release|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.Debug|Win32.Build.0 = Debug|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.MinSizeRel|Win32.ActiveCfg = Release|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.MinSizeRel|Win32.Build.0 = Release|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.Release|Win32.ActiveCfg = Release|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.Release|Win32.Build.0 = Release|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
+		{A4F619D5-EBE2-7313-97D4-D5C69640CAE4}.RelWithDebInfo|Win32.Build.0 = Release|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.Debug|Win32.Build.0 = Debug|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.MinSizeRel|Win32.ActiveCfg = MinSizeRel|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.MinSizeRel|Win32.Build.0 = MinSizeRel|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.Release|Win32.ActiveCfg = Release|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.Release|Win32.Build.0 = Release|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|Win32
+		{25EB7FAF-9934-32BB-B95C-2A98B73D8FCE}.RelWithDebInfo|Win32.Build.0 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

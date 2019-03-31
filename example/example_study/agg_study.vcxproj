@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\agg25\font_win32_tt\agg_font_win32_tt.cpp" />
+    <ClCompile Include="..\..\agg25\src\agg_bezier_arc.cpp" />
+    <ClCompile Include="..\..\agg25\src\agg_curves.cpp" />
+    <ClCompile Include="..\..\agg25\src\agg_trans_affine.cpp" />
     <ClCompile Include="..\..\agg25\src\agg_vcgen_stroke.cpp" />
     <ClCompile Include="..\agg_platform\agg_platform_support.cpp" />
     <ClCompile Include="..\agg_platform\agg_win32_bmp.cpp" />
@@ -65,7 +69,7 @@
       <WarningLevel>Level3</WarningLevel>
       <MinimalRebuild>true</MinimalRebuild>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../agg_platform;../../agg25/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../agg_platform;../../agg25/include;../../agg25/font_win32_tt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\Debug\aa_demo.pch</PrecompiledHeaderOutputFile>

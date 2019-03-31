@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
  
 #include "agg_platform_support.h"
 #include "agg_win32_bmp.h" 
@@ -16,6 +16,8 @@
 #include "agg_path_storage.h"
 #include "agg_conv_stroke.h"
 #include "agg_rasterizer_scanline_aa.h"
+
+#include "agg_font_win32_tt.h"
 
 #include <vector>
 //------------------------------
@@ -128,7 +130,7 @@ public:
 		memset(Coefficient, 0, degree*degree*sizeof(int));
 
 
-		//�������
+		//计算矩阵
 		for (int i = 0; i < degree; i++)
 		{
 			for (int k = i; k < degree; k++)
@@ -194,8 +196,115 @@ public:
 		}	
 	}
 
+	void draw_text_one(HDC hdc)
+	{
 
-	void on_draw(HDC hdc)
+		agg::pixfmt_bgr24 pixf(m_renbuf);
+
+		typedef agg::renderer_base<agg::pixfmt_bgr24> renderer_base_type;
+		renderer_base_type renb(pixf);
+
+		typedef agg::renderer_scanline_aa_solid<renderer_base_type> renderder_scanline_type;
+		renderder_scanline_type rensl(renb);
+
+		//clean srceen
+		//renb.clear(agg::rgba(1,1,1));
+
+		agg::scanline_u8 sl;
+		agg::rasterizer_scanline_aa<> ras; 
+
+		typedef agg::font_engine_win32_tt_int16 fe_type;
+		typedef fe_type::path_adaptor_type vs_type;
+		// 字体引擎
+		fe_type fe( hdc ); //注意，实际应用时要释放HDC
+		fe.height(36.0);
+		fe.flip_y(true);
+		fe.hinting(true);
+		// 注意后面的glyph_rendering ren_type参数
+		fe.create_font("黑体",agg::glyph_ren_outline);
+		// 字体串
+		wchar_t *s = L"C++编程";
+		// 存放字体数据
+		std::vector<agg::int8u> data;
+		// 顶点源
+		vs_type vs;
+		// 注意这里，使用conv_curve转换
+		agg::conv_curve<vs_type> ccvs(vs);
+		// 字符输出的位置
+		int x=20,y=100;
+		for(;*s;s++)
+		{
+			// 让字体引擎准备好字体数据
+			if(!fe.prepare_glyph(*s)) continue;
+			// 把字体数据放到容器里
+			data.resize( fe.data_size() );
+			fe.write_glyph_to( &data[0] );
+			// 从字体数据中得到顶点源
+			vs.init(&data[0], data.size(), x, y);
+			// 移动输出位置
+			x += fe.advance_x();
+			y += fe.advance_y();
+			// 输出
+			ras.add_path(ccvs);
+			agg::render_scanlines_aa_solid(ras,sl,renb,agg::rgba(0,0,1));  
+		} 
+	}
+
+	void draw_text_two(HDC hdc)
+	{
+		 
+		agg::pixfmt_bgr24 pixf(m_renbuf);
+
+		typedef agg::renderer_base<agg::pixfmt_bgr24> renderer_base_type;
+		renderer_base_type renb(pixf);
+
+		typedef agg::renderer_scanline_aa_solid<renderer_base_type> renderder_scanline_type;
+		renderder_scanline_type rensl(renb);
+
+		//clean srceen
+		//renb.clear(agg::rgba(1,1,1));
+
+		agg::scanline_u8 sl;
+		agg::rasterizer_scanline_aa<> ras; 
+
+		typedef agg::font_engine_win32_tt_int16 fe_type;
+		typedef fe_type::gray8_adaptor_type ras_type;
+		typedef ras_type::embedded_scanline sl_type;
+		// 字体引擎
+		fe_type fe(  hdc ); //注意，实际应用时要释放HDC
+		fe.height(36.0);
+		fe.flip_y(true);
+		fe.hinting(true);
+		// 注意后面的glyph_rendering ren_type参数
+		fe.create_font("黑体",agg::glyph_ren_agg_gray8);
+		// 字体串
+		wchar_t *s = L"C++变成死相";
+		// 存放字体数据
+		std::vector<agg::int8u> data;
+		// Rasterizer和Scanline
+		ras_type ras_font;
+		sl_type sl_font;
+		// 字符输出的位置
+		int x=200,y=100;
+		for(;*s;s++)
+		{
+			// 让字体引擎准备好字体数据
+			if(!fe.prepare_glyph(*s)) continue;
+			// 把字体数据放到容器里
+			data.resize( fe.data_size() );
+			fe.write_glyph_to( &data[0] );
+			// 从字体数据中得到Rasterizer
+			ras_font.init(&data[0], data.size(), x, y);
+			// 移动输出位置
+			x += fe.advance_x();
+			y += fe.advance_y();
+			// 输出
+			agg::render_scanlines_aa_solid(ras_font,sl_font,renb, agg::rgba(0,0,1));
+		} 
+	
+	}
+
+	void draw_curve(HDC hdc)
 	{
 		agg::pixfmt_bgr24 pixf(m_renbuf);
 
@@ -252,7 +361,16 @@ public:
 		}
 		agg::render_scanlines_aa_solid(ras,sl,renb,agg::rgba8(85,85,85));
 		ras.reset();
-		
+	}
+	
+	void on_draw(HDC hdc)
+	{
+		draw_curve(hdc);
+
+		draw_text_one(hdc);
+
+		draw_text_two(hdc);
+
 		m_pixel_map.blend(hdc,0,0);
 
 	}
