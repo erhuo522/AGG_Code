@@ -64,8 +64,8 @@ public:
 		int nCtrCnt =m_ctrlPoints.size();
 		if(m_ctrlIndex >= 0 && m_ctrlIndex < nCtrCnt)
 		{
-			m_ctrlPoints[m_ctrlIndex].x = x;
-			m_ctrlPoints[m_ctrlIndex].y = y;
+			m_ctrlPoints[m_ctrlIndex].x = (float)x;
+			m_ctrlPoints[m_ctrlIndex].y = (float)y;
 
 			BezierCurve(m_samplePoints, m_ctrlPoints);
 			
@@ -208,7 +208,7 @@ public:
 		renderder_scanline_type rensl(renb);
 
 		//clean srceen
-		//renb.clear(agg::rgba(1,1,1));
+		renb.clear(agg::rgba(1,1,1));
 
 		agg::scanline_u8 sl;
 		agg::rasterizer_scanline_aa<> ras; 
@@ -216,7 +216,7 @@ public:
 		typedef agg::font_engine_win32_tt_int16 fe_type;
 		typedef fe_type::path_adaptor_type vs_type;
 		// 字体引擎
-		fe_type fe( hdc ); //注意，实际应用时要释放HDC
+		fe_type fe( hdc ); 
 		fe.height(36.0);
 		fe.flip_y(true);
 		fe.hinting(true);
@@ -231,7 +231,7 @@ public:
 		// 注意这里，使用conv_curve转换
 		agg::conv_curve<vs_type> ccvs(vs);
 		// 字符输出的位置
-		int x=20,y=100;
+		double x=20,y=100;
 		for(;*s;s++)
 		{
 			// 让字体引擎准备好字体数据
@@ -262,7 +262,7 @@ public:
 		renderder_scanline_type rensl(renb);
 
 		//clean srceen
-		//renb.clear(agg::rgba(1,1,1));
+		renb.clear(agg::rgba(1,1,1));
 
 		agg::scanline_u8 sl;
 		agg::rasterizer_scanline_aa<> ras; 
@@ -271,7 +271,7 @@ public:
 		typedef fe_type::gray8_adaptor_type ras_type;
 		typedef ras_type::embedded_scanline sl_type;
 		// 字体引擎
-		fe_type fe(  hdc ); //注意，实际应用时要释放HDC
+		fe_type fe(  hdc ); 
 		fe.height(36.0);
 		fe.flip_y(true);
 		fe.hinting(true);
@@ -285,7 +285,7 @@ public:
 		ras_type ras_font;
 		sl_type sl_font;
 		// 字符输出的位置
-		int x=200,y=100;
+		double x=200,y=100;
 		for(;*s;s++)
 		{
 			// 让字体引擎准备好字体数据
@@ -353,7 +353,7 @@ public:
 		ras.reset();
 
 		//------------------------------------------------------
-		for (int i = 0; i < m_ctrlPoints.size(); i++)
+		for (size_t i = 0; i < m_ctrlPoints.size(); i++)
 		{
 			agg::ellipse ellipse(m_ctrlPoints[i].x, m_ctrlPoints[i].y,3,3); 
 
